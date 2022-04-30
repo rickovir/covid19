@@ -6,6 +6,29 @@ const cors = require('cors')
 const app = express();
 const router = express.Router();
 
+// const allowedOrigins = [
+//     "https://app.example.com",
+//     "https://example.com",
+// ];
+
+// check origin
+var corsOptions = {
+    origin: (origin, callback) => {
+        if (
+            process.env.NETLIFY_DEV === "true" 
+            // ||
+            // allowedOrigins.includes(origin)
+        ) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    optionsSuccessStatus: 200,
+};
+
+router.use(cors(corsOptions));
+
 router.get("/", (req, res) => {
   res.json({
     hello: "hi!"
@@ -32,7 +55,7 @@ router.get("/naga", (req, res) => {
 });
 
 //set middleware
-app.use(cors());
+// app.use(cors());
 
 //set netlify
 app.use(`/.netlify/functions/api`, router);
