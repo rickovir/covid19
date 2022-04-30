@@ -1,6 +1,7 @@
 const express = require("express");
 const serverless = require("serverless-http");
 const https = require('https');
+const cors = require('cors')
 
 const app = express();
 const router = express.Router();
@@ -30,6 +31,10 @@ router.get("/naga", (req, res) => {
     });
 });
 
+//set middleware
+app.use(cors());
+
+//set netlify
 app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
