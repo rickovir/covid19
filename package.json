@@ -2,7 +2,7 @@
   "name": "covid19-data-rickovir",
   "version": "1.0.0",
   "description": "test aja",
-  "main": "index.js",
+  "main": "functions/main.js",
   "scripts": {
     "start": "node ./src/api.js",
     "build": "netlify-lambda build src"

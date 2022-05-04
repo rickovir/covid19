@@ -18,12 +18,12 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/update", (req, res) => {
-    const url = 'https://data.covid19.go.id/public/api/update.json';
-    axios.get(url).then((data) => {
-        return res.json(data)
-    }).catch(() => {
-        res.status(500).send('Something broke!');
+router.get("/update", async (req, res) => {
+    return res.json({
+        message: "ok",
+        data:
+          (await axios.get("https://data.covid19.go.id/public/api/update.json"))
+            ?.data || null,
     });
 });
 
