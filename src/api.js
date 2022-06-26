@@ -6,6 +6,8 @@ const axios = require("axios");
 const app = express();
 const router = express.Router();
 
+const mockData = require('./mock-data');
+
 router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -19,11 +21,18 @@ router.get("/", (req, res) => {
 });
 
 router.get("/update", async (req, res) => {
-    return res.json({
-        message: "ok",
-        data:
-          (await axios.get("https://data.covid19.go.id/public/api/update.json"))
-            ?.data || null,
+    axios.get("https://data.covid19.go.id/public/api/updatex.json")
+    .then((resp) => {
+        return res.json({
+            message: 'ok',
+            data: resp.data || null
+        });
+    })
+    .catch(() => {
+        return res.json({
+            message: 'ok',
+            data: mockData
+        });
     });
 });
 
