@@ -21,16 +21,18 @@ router.get("/", (req, res) => {
 });
 
 router.get("/update", async (req, res) => {
-    axios.get("https://data.covid19.go.id/public/api/updatex.json")
+    axios.get("https://data.covid19.go.id/public/api/update.json")
     .then((resp) => {
         return res.json({
             message: 'ok',
+            dbStatus: 1,
             data: resp.data || null
         });
     })
     .catch(() => {
         return res.json({
             message: 'ok',
+            dbStatus: 0,
             data: mockData
         });
     });
