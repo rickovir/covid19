@@ -33,7 +33,7 @@ router.get("/update", async (req, res) => {
         return res.json({
             message: 'ok',
             dbStatus: 0,
-            data: mockData
+            data: mockData.default
         });
     });
 });
